@@ -4,7 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
-  List<TextComponent> componentsList = new ArrayList<>();
+  private List<TextComponent> componentsList;
+  private TextType textType;
+
+  public TextComposite(TextType textType) {
+    this.textType = textType;
+    this.componentsList=new ArrayList<>();
+  }
+  public TextComposite() {
+  }
+  public TextType getTextType() {
+    return textType;
+  }
 
   @Override
   public boolean add(TextComponent component) {
@@ -21,12 +32,17 @@ public class TextComposite implements TextComponent {
     return componentsList.get(index);
   }
 
+  @Override
+  public List<TextComponent> getTextComponentsList() {
+    return componentsList;
+  }
+
   public String toString() {
-    String result = "";
+    StringBuilder stringBuilder = new StringBuilder();
     for (TextComponent component : componentsList) {
-      result += component.toString() + " ";
+      stringBuilder.append(component);
     }
-    result += '\n';
-    return result;
+    return stringBuilder.toString();
   }
 }
+

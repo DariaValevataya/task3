@@ -1,10 +1,15 @@
 package com.epam.valevataya.composite;
 
-public class Word implements TextComponent {
-  private String value;
+import java.util.List;
 
-  public Word(String value) {
-    this.value = value;
+public class Symbol implements TextComponent {
+  private char symbol;
+  private TextType textType;
+
+  public Symbol(char value, TextType textType) {
+
+    this.symbol = value;
+    this.textType=textType;
   }
 
   @Override
@@ -23,7 +28,12 @@ public class Word implements TextComponent {
   }
 
   @Override
+  public List<TextComponent> getTextComponentsList() {
+    return null;
+  }
+
+  @Override
   public String toString() {
-    return value;
+    return symbol+"";
   }
 }
