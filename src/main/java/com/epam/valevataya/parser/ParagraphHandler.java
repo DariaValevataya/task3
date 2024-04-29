@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParagraphHandler extends AbstractTextHandler {
-  private static final String SENTENCE_REGEX = "[\\.?!\\.{3}]\\b";
+  private static final String SENTENCE_REGEX = "(\\.|\\?|!|\\.{3})\\b";
 
   public ParagraphHandler() {
     setSuccessor(new SentenseHandler());
