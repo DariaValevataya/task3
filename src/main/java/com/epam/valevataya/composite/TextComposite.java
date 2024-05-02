@@ -11,8 +11,6 @@ public class TextComposite implements TextComponent {
     this.textType = textType;
     this.componentsList=new ArrayList<>();
   }
-  public TextComposite() {
-  }
   public TextType getTextType() {
     return textType;
   }
@@ -39,8 +37,21 @@ public class TextComposite implements TextComponent {
 
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
-    for (TextComponent component : componentsList) {
-      stringBuilder.append(component);
+    for(TextComponent component : componentsList){
+     switch (component.getTextType().toString()){
+       case "PARAGRAPH":stringBuilder.append("\t").append(component).append("\n");
+       break;
+       case "SENTENCE":stringBuilder.append(component).append("\s");
+       break;
+       case "LEXEME":stringBuilder.append(component).append("\s");
+       break;
+       case "WORD":stringBuilder.append(component);
+       break;
+       case "PUNCTUATION":stringBuilder.append(component);
+       break;
+       case "LETTER":stringBuilder.append(component);
+       break;
+     }
     }
     return stringBuilder.toString();
   }

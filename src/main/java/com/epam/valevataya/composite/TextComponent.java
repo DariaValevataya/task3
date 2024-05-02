@@ -9,5 +9,5 @@ public interface TextComponent {
 
   TextComponent getSubElement(int index);
   List<TextComponent> getTextComponentsList();
-
+  TextType getTextType();
 }

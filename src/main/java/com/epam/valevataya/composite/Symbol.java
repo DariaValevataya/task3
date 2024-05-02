@@ -14,26 +14,49 @@ public class Symbol implements TextComponent {
 
   @Override
   public boolean add(TextComponent component) {
-    return false;
+    throw new UnsupportedOperationException();
   }
 
   @Override
   public boolean remove(TextComponent component) {
-    return false;
+    throw new UnsupportedOperationException();
   }
 
   @Override
   public TextComponent getSubElement(int index) {
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   @Override
   public List<TextComponent> getTextComponentsList() {
-    return null;
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public TextType getTextType() {
+    return textType;
   }
 
   @Override
   public String toString() {
-    return symbol+"";
+    return String.valueOf(symbol);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Symbol symbol = (Symbol) o;
+    return this.symbol == symbol.symbol
+            && textType == symbol.textType;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + symbol;
+    result = prime * result + (textType == null ? 0 : textType.hashCode());
+    return result;
   }
 }
