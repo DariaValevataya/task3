@@ -7,9 +7,12 @@ public class Symbol implements TextComponent {
   private TextType textType;
 
   public Symbol(char value, TextType textType) {
-
     this.symbol = value;
-    this.textType=textType;
+    this.textType = textType;
+  }
+
+  public Symbol(char value) {
+    this.symbol = value;
   }
 
   @Override
@@ -35,6 +38,10 @@ public class Symbol implements TextComponent {
   @Override
   public TextType getTextType() {
     return textType;
+  }
+
+  public void setTextType(TextType textType) {
+    this.textType = textType;
   }
 
   @Override

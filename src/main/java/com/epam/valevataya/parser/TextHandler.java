@@ -3,12 +3,13 @@ package com.epam.valevataya.parser;
 import com.epam.valevataya.composite.TextComponent;
 import com.epam.valevataya.composite.TextComposite;
 import com.epam.valevataya.composite.TextType;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TextHandler extends AbstractTextHandler {
-  private static final String PARAGRAPH_REGEX = "\\t";
+  private static final Logger logger = LogManager.getLogger();
+
+  private static final String PARAGRAPH_REGEX = "\\s{4}";
 
   public TextHandler() {
     setSuccessor(new ParagraphHandler());
@@ -16,14 +17,12 @@ public class TextHandler extends AbstractTextHandler {
 
   @Override
   public void parse(String text, TextComponent component) {
-    Pattern paragraphPattern = Pattern.compile(PARAGRAPH_REGEX);
-    Matcher paragraphMatcher = paragraphPattern.matcher(text);
-
-    while (paragraphMatcher.find()) {
-      String paragraph = paragraphMatcher.group();
+    String[] paragraphs = text.split(PARAGRAPH_REGEX);
+    for (String paragraph : paragraphs) {
+      logger.info("Paragraph: " + paragraph);
       TextComponent paragraphComponent = new TextComposite(TextType.PARAGRAPH);
       component.add(paragraphComponent);
-      getSuccessor().parse(paragraph, component);
+      getSuccessor().parse(paragraph.trim(), component);
     }
   }
 }

@@ -8,6 +8,9 @@ public interface TextComponent {
   boolean remove(TextComponent component);
 
   TextComponent getSubElement(int index);
+
   List<TextComponent> getTextComponentsList();
+
   TextType getTextType();
+
 }

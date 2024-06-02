@@ -1,39 +1,36 @@
 package com.epam.valevataya.parser;
 
+import com.epam.valevataya.composite.Symbol;
 import com.epam.valevataya.composite.TextComponent;
 import com.epam.valevataya.composite.TextComposite;
 import com.epam.valevataya.composite.TextType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public class LexemeHandler extends AbstractTextHandler {
+  public static final Logger logger = LogManager.getLogger();
+  private static final String WORD_REGEX = "(?=[,.!?)])";
+  private static final String PUNCTUATION_REGEX = "(\\p{Punct}|\\.{3})";
 
-public class LexemeHandler extends AbstractTextHandler{
-  private static final String WORD_REGEX = "[\\wа-яА-я]+";
-  private static final String PUNCTUATION_REGEX = "\\p{Punct}|…";
   public LexemeHandler() {
-    setSuccessor(new WordHandler());
+  setSuccessor(new WordHandler());
   }
+
   @Override
   public void parse(String text, TextComponent component) {
-    Pattern wordPattern = Pattern.compile(WORD_REGEX);
-    Matcher wordMatcher = wordPattern.matcher(text);
-
-    Pattern punctuationPattern = Pattern.compile(PUNCTUATION_REGEX);
-    Matcher punctuationMatcher = punctuationPattern.matcher(text);
-
-    while (wordMatcher.find()) {
-      String word = wordMatcher.group();
-      TextComponent wordComponent = new TextComposite(TextType.WORD);
-      component.add(wordComponent);
-      getSuccessor().parse(word, component);
-    }
-
-    while (punctuationMatcher.find()) {
-      String punctuation = punctuationMatcher.group();
-      TextComponent punctuationComponent = new TextComposite(TextType.PUNCTUATION);
-      component.add(punctuationComponent);
-      getSuccessor().parse(punctuation, component);
-
+    String[] words = text.split(WORD_REGEX);
+    for (String word: words) {
+      if (word.matches(PUNCTUATION_REGEX)) {
+        char ch = word.charAt(0);
+        Symbol symbol = new Symbol(ch, TextType.PUNCTUATION);
+        logger.info("Punctuation: "+word);
+        component.add(symbol);
+      } else {
+        TextComponent wordComponent = new TextComposite(TextType.WORD);
+        logger.info("Word: "+word);
+        component.add(wordComponent);
+        getSuccessor().parse(word, wordComponent);
+      }
     }
   }
 }

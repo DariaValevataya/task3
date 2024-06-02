@@ -5,7 +5,6 @@ import com.epam.valevataya.composite.TextComposite;
 
 public abstract class AbstractTextHandler {
   private AbstractTextHandler successor;
-
   public void setSuccessor(AbstractTextHandler successor) {
     this.successor = successor;
   }
