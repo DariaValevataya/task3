@@ -12,7 +12,7 @@ import com.epam.valevataya.service.TextService;
 import com.epam.valevataya.service.impl.TextServiceImpl;
 
 public class Main {
-  public static void main(String args[]) throws TextException {
+  public static void main(String[] args) throws TextException {
     TextReader reader = new TextReaderImpl();
     String text = reader.readFile("data/textData.txt");
     AbstractTextHandler handler = new TextHandler();
@@ -22,6 +22,5 @@ public class Main {
 
     TextService service = new TextServiceImpl();
     System.out.println(service.sortParagraphsByCountOfSentences(component));
-
   }
 }

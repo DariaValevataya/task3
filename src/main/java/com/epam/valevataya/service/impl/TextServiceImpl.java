@@ -5,6 +5,7 @@ import com.epam.valevataya.composite.TextType;
 import com.epam.valevataya.exception.TextException;
 import com.epam.valevataya.service.TextService;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -13,19 +14,32 @@ import java.util.stream.Collectors;
 public class TextServiceImpl implements TextService {
   @Override
   public List<TextComponent> sortParagraphsByCountOfSentences(TextComponent text) throws TextException {
-    List<TextComponent> textComponents = text.getTextComponentsList();
-    System.out.println(textComponents);
-    List<TextComponent> sortedParagraphs = textComponents.stream()
-            .filter(p -> p.getTextType() == TextType.PARAGRAPH && p instanceof TextComponent)
-            .map(p -> (TextComponent) p)
-            .sorted(Comparator.comparingInt(p -> p.getTextComponentsList().size()))
-            .toList();
+    List<TextComponent> sortedParagraphs = new ArrayList<>();
+    if (text.getTextType() == TextType.TEXT) {
+      sortedParagraphs = text.getTextComponentsList()
+              .stream()
+              .sorted(Comparator.comparingInt(c -> c.getTextComponentsList().size()))
+              .toList();
+    }
     return sortedParagraphs;
   }
 
   @Override
   public List<TextComponent> findSentenceWithLongestWord(TextComponent text) throws TextException {
-    return null;
+    List<TextComponent> sentence = new ArrayList<>();
+    if (text.getTextType() == TextType.PARAGRAPH) {
+      sentence = text.getTextComponentsList()
+              .stream()
+              .sorted(Comparator.comparingInt(c -> {
+                int sum = 0;
+                for (TextComponent component : c.getTextComponentsList()) {
+                  sum += component.getTextComponentsList().size();
+                }
+                return sum;
+              }))
+              .toList();
+    }
+    return sentence;
   }
 
   @Override
