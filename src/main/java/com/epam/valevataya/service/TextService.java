@@ -11,11 +11,11 @@ public interface TextService {
 
   List<TextComponent> findSentenceWithLongestWord(TextComponent text) throws TextException;
 
-  void removeSentences(TextComponent text, int wordsCount) throws TextException;
+  List<TextComponent> removeSentences(TextComponent text, int wordsCount) throws TextException;
 
   Map<String, Integer> findAndCountSameWords(TextComponent text) throws TextException;
 
-  int countVowels(TextComponent composite) throws TextException;
+  int countVowels(TextComponent text) throws TextException;
 
-  int countConsonants(TextComponent composite) throws TextException;
+  int countConsonants(TextComponent text) throws TextException;
 }

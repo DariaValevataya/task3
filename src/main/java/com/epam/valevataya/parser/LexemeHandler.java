@@ -13,21 +13,21 @@ public class LexemeHandler extends AbstractTextHandler {
   private static final String PUNCTUATION_REGEX = "(\\p{Punct}|\\.{3})";
 
   public LexemeHandler() {
-  setSuccessor(new WordHandler());
+    setSuccessor(new WordHandler());
   }
 
   @Override
   public void parse(String text, TextComponent component) {
     String[] words = text.split(WORD_REGEX);
-    for (String word: words) {
+    for (String word : words) {
       if (word.matches(PUNCTUATION_REGEX)) {
         char ch = word.charAt(0);
         Symbol symbol = new Symbol(ch, TextType.PUNCTUATION);
-        logger.info("Punctuation: "+word);
+        logger.info("Punctuation: " + word);
         component.add(symbol);
       } else {
         TextComponent wordComponent = new TextComposite(TextType.WORD);
-        logger.info("Word: "+word);
+        logger.info("Word: " + word);
         component.add(wordComponent);
         getSuccessor().parse(word, wordComponent);
       }

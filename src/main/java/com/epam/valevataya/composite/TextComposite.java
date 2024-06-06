@@ -9,8 +9,9 @@ public class TextComposite implements TextComponent {
 
   public TextComposite(TextType textType) {
     this.textType = textType;
-    this.componentsList=new ArrayList<>();
+    this.componentsList = new ArrayList<>();
   }
+
   public TextType getTextType() {
     return textType;
   }
@@ -19,6 +20,7 @@ public class TextComposite implements TextComponent {
   public boolean add(TextComponent component) {
     return componentsList.add(component);
   }
+
   @Override
   public boolean remove(TextComponent component) {
     return componentsList.remove(component);
@@ -33,23 +35,30 @@ public class TextComposite implements TextComponent {
   public List<TextComponent> getTextComponentsList() {
     return componentsList;
   }
+
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
-    for(TextComponent component : componentsList){
-       switch (component.getTextType()){
-       case PARAGRAPH:stringBuilder.append("\t").append(component).append("\n");
-       break;
-       case SENTENCE:stringBuilder.append(component).append("\s");
-       break;
-       case LEXEME:stringBuilder.append(component).append("\s");
-       break;
-       case WORD:stringBuilder.append(component);
-       break;
-       case PUNCTUATION:stringBuilder.append(component);
-       break;
-       case LETTER:stringBuilder.append(component);
-       break;
-     }
+    for (TextComponent component : componentsList) {
+      switch (component.getTextType()) {
+        case PARAGRAPH:
+          stringBuilder.append(component).append("\n").append("\t");
+          break;
+        case SENTENCE:
+          stringBuilder.append(component).append("\s");
+          break;
+        case LEXEME:
+          stringBuilder.append(component).append("\s");
+          break;
+        case WORD:
+          stringBuilder.append(component);
+          break;
+        case PUNCTUATION:
+          stringBuilder.append(component);
+          break;
+        case LETTER:
+          stringBuilder.append(component);
+          break;
+      }
     }
     return stringBuilder.toString();
   }

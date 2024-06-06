@@ -26,7 +26,7 @@ public class ParagraphHandler extends AbstractTextHandler {
       logger.info("Sentence: " + sentence);
       TextComponent sentenceComponent = new TextComposite(TextType.SENTENCE);
       component.add(sentenceComponent);
-      getSuccessor().parse(sentence, component);
+      getSuccessor().parse(sentence, sentenceComponent);
       start = matcher.end();
     }
   }

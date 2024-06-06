@@ -22,7 +22,7 @@ public class TextHandler extends AbstractTextHandler {
       logger.info("Paragraph: " + paragraph);
       TextComponent paragraphComponent = new TextComposite(TextType.PARAGRAPH);
       component.add(paragraphComponent);
-      getSuccessor().parse(paragraph.trim(), component);
+      getSuccessor().parse(paragraph.trim(), paragraphComponent);
     }
   }
 }

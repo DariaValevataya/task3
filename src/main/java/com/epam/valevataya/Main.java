@@ -21,6 +21,12 @@ public class Main {
     System.out.println(component);
 
     TextService service = new TextServiceImpl();
-    System.out.println(service.sortParagraphsByCountOfSentences(component));
+    int wordCountInSentence = 5;
+    System.out.println("Sorted paragraphs by count of sentences: " + service.sortParagraphsByCountOfSentences(component));
+    System.out.println("Sentence with the longest word in the text: " + service.findSentenceWithLongestWord(component));
+    System.out.println("All sentences without removed sentence(s): " + service.removeSentences(component, wordCountInSentence));
+    System.out.println("Same words and count: " + service.findAndCountSameWords(component));
+    System.out.println("Count of vowels in the text: " + service.countVowels(component));
+    System.out.println("Count of consonants in the text: " + service.countConsonants(component));
   }
 }
